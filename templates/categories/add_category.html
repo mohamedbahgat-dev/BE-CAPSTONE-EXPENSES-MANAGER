@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block content %}
+<h2>Add Category</h2>
+<form method="post">
+  {% csrf_token %}
+  <div id="category_choice">
+    {{ form.category_choice.label_tag }}<br />
+    {{ from.category_choice }}
+  </div>
+
+  <div id="custom-category-field" style="display: none; margin-top: 10px">
+    {{ form.custom_category.label_tag }}<br />
+    {{ form.custom_category }}
+  </div>
+
+  <button type="submit">Save Category</button>
+</form>
+
+<script>
+  const categorySelect = document.getElementById("category_choice");
+  const customField = document.getElementById("custom-category-field");
+
+  function toggleCustomField() {
+    if (categorySelect.value === "custom") {
+      customField.style.display = "block";
+    } else {
+      customField.style.display = "none";
+      document.getElementById("custom_category_field").value = "";
+    }
+  }
+
+  categorySelect.addEventListener("change", toggleCustomField);
+  window.addEventListener("load", toggleCustomField);
+</script>
+{% endblock content %}
