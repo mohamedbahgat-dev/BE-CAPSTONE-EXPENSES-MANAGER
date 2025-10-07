@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from .forms import CategoryForm
 from .models import Category
 
+
 # Create your views here.
 class HomePageView(TemplateView):
     template_name = 'home.html'
