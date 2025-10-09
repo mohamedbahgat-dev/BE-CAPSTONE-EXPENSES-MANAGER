@@ -1,0 +1,73 @@
+{% extends 'base.html' %} {% load static %}
+
+<title>{% block title %}profile {{ user.username }} {% endblock title %}</title>
+
+{% block content %}
+<section class="profile">
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="profile-header">
+      <div class="image-container">
+        {% if user.profile_picture %}
+        <img
+          class="profile-pic"
+          src="{{ user.profile_picture.url }}"
+          alt="{{ user.username }}'s profile picture"
+        />
+        {% else %}
+        <img
+          class="profile-pic"
+          src="{% static 'images/avatar.jpg' %}"
+          alt="Default profile picture"
+        />
+        {% endif %}
+
+        <div class="change-img">{{ form.profile_picture }}</div>
+      </div>
+      <div>
+        <h3>{{ user.username|upper }}</h3>
+        <p>{{ user.email }}</p>
+      </div>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Firstname</h3>
+      <p>{{ form.first_name }}</p>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Lastname</h3>
+      <p>{{ form.last_name }}</p>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Email address</h3>
+      <p>{{ form.email }}</p>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Age</h3>
+      <p>{{ form.age }}</p>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Location</h3>
+      <p>{{ form.location }}</p>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Language</h3>
+      <p>{{ form.language }}</p>
+    </div>
+
+    <div class="profile-data-card">
+      <h3>Currency</h3>
+      <p>{{ form.currency }}</p>
+    </div>
+
+    <button class="edit-profile" type="submit">Save Changes</button>
+  </form>
+</section>
+
+{% endblock content %}
