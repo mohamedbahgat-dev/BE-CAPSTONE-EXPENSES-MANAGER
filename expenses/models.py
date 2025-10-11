@@ -8,28 +8,19 @@ User = get_user_model()
 # Create your models here.
 # create category model with predefined category names and option for user to add a custom category
 class Category(models.Model):
-    PREDEFINED_CHOICES = [
-        ('FOOD', 'FOOD'),
-        ('Utilities', 'Utilities'),
-        ('Healthcare', 'Healthcare'),
-        ('Transport', 'Transport'),
-        ('Rent', 'Rent'),
-        ('Entertainment', 'Entertainment'),
-        ('Other', 'Other'),
-    ]
-    name = models.CharField(max_length=50)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='categories')
-    is_predefined = models.BooleanField(default=False)
+    name = models.CharField(max_length=50, unique=True)
+    is_default = models.BooleanField(default=False)
     
     class Meta:
-        unique_together = ('name', 'user')
+        verbose_name_plural = 'Caregories'
+        ordering = ['name']
 
     def __str__(self):
         return self.name
 
 
 # create Expense model with foreign keys of user and category
-class Expense(models.Model):
+class Expense(models.Model): 
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=250, blank=True)
     date = models.DateField(auto_now_add=True)
@@ -38,16 +29,12 @@ class Expense(models.Model):
         on_delete=models.CASCADE,
         related_name='expenses'
     )
-    category = models.ForeignKey(
-        Category,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='expenses'
-    )
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    
     def __str__(self):
         return f"{self.category} - {self.amount} at {self.date}"
     
+
 # budget model creation with foreign key for user and predefined choices for month, also defaulted value for year
 class Budget(models.Model):
     MONTH_CHOICES = [

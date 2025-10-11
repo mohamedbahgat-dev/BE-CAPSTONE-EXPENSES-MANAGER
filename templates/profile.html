@@ -68,6 +68,10 @@
 
     <button class="edit-profile" type="submit">Save Changes</button>
   </form>
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button class="home-logout" type="submit">Log Out</button>
+  </form>
 </section>
 
 {% endblock content %}

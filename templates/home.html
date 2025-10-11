@@ -6,10 +6,40 @@
 <h1>Expenses Tracker</h1>
 {% if user.is_authenticated %}
 <p>Welcome back, {{ user.username }}</p>
-<form action="{% url 'logout' %}" method="post">
-  {% csrf_token %}
-  <button class="home-logout" type="submit">Log Out</button>
-</form>
+
+<div>
+  <h3>Transactions</h3>
+  {% if transactions %}
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Amount({{ user.currency }})</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in transactions %}
+      <tr>
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.description }}</td>
+        <td>{{ transaction.category.name }}</td>
+        <td>{{ transaction.amount }}</td>
+        <td style="display: flex; flex-direction: column">
+          <a href="{% url 'update_transaction' transaction.pk %}">Update</a>
+          <a href="{% url 'delete_transaction' transaction.pk %}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No expenses recorded yet.</p>
+  {% endif %}
+  <a href="{% url 'add_transaction' %}">Add new transaction</a>!
+</div>
+
 {% else %}
 <p>You are not loged in.</p>
 <a class="home-login" href="{% url 'login' %}">Login</a>
