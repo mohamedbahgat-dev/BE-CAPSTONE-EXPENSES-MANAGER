@@ -43,19 +43,35 @@ INSTALLED_APPS = [
     'accounts',
     'apis',
     # third-party apps
-    'rest_framework'
+    'rest_framework',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated", # new
+    ],
+}
+
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:3000", # react server port
+    "http://localhost:8000", # django server port
+)
+
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+
 
 ROOT_URLCONF = 'expense_tracker_project.urls'
 
