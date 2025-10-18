@@ -61,11 +61,13 @@ class ExpensesDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class HomePageView(ListView):
     model = Expense
     template_name = 'home.html'
+   
+class DashboardView(ListView):
+    model = Expense
+    template_name = 'dashboard.html'
     context_object_name = 'transactions'
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
             return Expense.objects.filter(user=self.request.user).order_by('-date')
         return Expense.objects.none()
-
-

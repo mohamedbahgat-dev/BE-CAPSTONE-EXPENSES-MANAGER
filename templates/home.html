@@ -3,44 +3,25 @@
 <title>{% block title %}Home{% endblock title %}</title>
 
 {% block content %}
-<h1>Expenses Tracker</h1>
-{% if user.is_authenticated %}
-<p>Welcome back, {{ user.username }}</p>
-
-<div>
-  <h3>Transactions</h3>
-  {% if transactions %}
-  <table>
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Amount({{ user.currency }})</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for transaction in transactions %}
-      <tr>
-        <td>{{ transaction.date }}</td>
-        <td>{{ transaction.description }}</td>
-        <td>{{ transaction.category.name }}</td>
-        <td>{{ transaction.amount }}</td>
-        <td style="display: flex; flex-direction: column">
-          <a href="{% url 'update_transaction' transaction.pk %}">Update</a>
-          <a href="{% url 'delete_transaction' transaction.pk %}">Delete</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-  <p>No expenses recorded yet.</p>
-  {% endif %}
-  <a href="{% url 'add_transaction' %}">Add new transaction</a>!
+<div class="home-container">
+  <div class="home-page">
+    <h1 class="expense-title">Expenses Tracker</h1>
+    <div class="pages-items">
+      <h3>
+        <a
+          href="{% if user.is_authenticated %}{% url 'dashboard' user.pk %}{% else %}{% url 'login' %}{% endif %}"
+          >Dashboard</a
+        >
+      </h3>
+      <h3>
+        <a href="{% url 'expense_list' %}" target="_blank">API Interface</a>
+      </h3>
+      <h3>
+        <a href="{% url 'swagger-ui' %}" target="_blank">API Swagger Docs</a>
+      </h3>
+      <h3><a href="{% url 'redoc' %}" target="_blank">API Redoc Schema</a></h3>
+    </div>
+  </div>
 </div>
 
-{% else %}
-<p>You are not loged in.</p>
-<a class="home-login" href="{% url 'login' %}">Login</a>
-{% endif %} {% endblock content %}
+{% endblock content %}

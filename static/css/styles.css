@@ -7,19 +7,37 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background: #ffdede;
+  background: linear-gradient(
+    330deg,
+    rgba(255, 222, 222, 0.33) 0%,
+    rgba(255, 255, 255, 1) 58%,
+    rgba(255, 255, 255, 1) 66%,
+    rgb(170, 211, 240) 100%
+  );
   color: #333;
+  height: 100vh;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h2 {
+  color: white;
 }
 
 header {
-  background-color: #333;
+  background-color: #4a98e5;
   padding: 10px;
   text-align: center;
 }
 
 header nav ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -34,15 +52,11 @@ header nav ul li a {
   font-size: 18px;
 }
 
-.content {
-  margin: 20px;
-}
-
 footer {
   text-align: center;
   margin-top: 50px;
   padding: 10px;
-  background-color: #333;
+  background-color: #4a98e5;
   color: white;
 }
 
@@ -67,6 +81,11 @@ th {
   border-bottom: 2px solid black;
   margin-bottom: 20px;
   padding-bottom: 10px;
+}
+.profile-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-card {
@@ -160,8 +179,8 @@ th {
 
 .profile-pic {
   margin-right: 5px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
 }
 
@@ -220,4 +239,67 @@ th {
 .edit-container {
   display: flex;
   margin-top: 10px;
+}
+
+.content {
+  height: 83.1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-page {
+  min-height: 50vh;
+  background: #efc2ff;
+  background: #f4d4fc;
+  background: linear-gradient(
+    330deg,
+    rgba(244, 212, 252, 0.33) 0%,
+    rgb(244, 243, 243) 58%,
+    rgb(242, 241, 241) 66%,
+    rgb(202, 246, 247) 100%
+  );
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  margin: 80px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgb(206, 205, 205);
+}
+
+.expense-title {
+  text-align: center;
+}
+
+.pages-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 320px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.pages-items h3 {
+  padding: 10px;
+  background-color: #4ea6d5;
+  border-radius: 20px;
+  margin: 5px;
+  width: 200px;
+  text-align: center;
+}
+
+.pages-items h3 a {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
 }

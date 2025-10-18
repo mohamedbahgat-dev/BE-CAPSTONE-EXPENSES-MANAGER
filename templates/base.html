@@ -11,10 +11,28 @@
   <body>
     <header>
       <nav>
+        <h2>Expenses Manager</h2>
         <ul>
+          <li><a href="{% url 'home' %}">home</a></li>
+
           {% if user.is_authenticated %}
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'profile' user.pk %}">Profile</a></li>
+          <li><a href="{% url 'dashboard' user.pk %}">Dashboard</a></li>
+          <li class="profile-home">
+            {% if user.profile_picture %}
+            <img
+              class="profile-pic"
+              src="{{ user.profile_picture.url }}"
+              alt="{{ user.username }}'s profile picture"
+            />
+            {% else %}
+            <img
+              class="profile-pic"
+              src="{% static 'images/avatar.jpg' %}"
+              alt="Default profile picture"
+            />
+            {% endif %}
+            <a href="{% url 'profile' user.pk %}">{{ user.username }}</a>
+          </li>
 
           {% else %}
           <li><a href="{% url 'login' %}">Login</a></li>
