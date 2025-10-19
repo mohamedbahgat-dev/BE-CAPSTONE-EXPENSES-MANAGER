@@ -291,6 +291,7 @@ th {
 }
 
 .pages-items h3 {
+  cursor: pointer;
   padding: 10px;
   background-color: #4ea6d5;
   border-radius: 20px;
