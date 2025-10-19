@@ -3,6 +3,8 @@ from expenses.models import Expense
 from .serializers import ExpenseSerializer, UserSerializer
 from .permissions import IsAuthorOrReadOnly, IsUserOrReadOnly
 from django.contrib.auth import get_user_model
+from dj_rest_auth.registration.views import RegisterView
+from django.urls import reverse
 
 
 
@@ -26,3 +28,9 @@ class UserDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsUserOrReadOnly]
+
+
+class CustomRegisterView(RegisterView):
+    def get_success_url(self):
+        # redirect to your items list page after successful registration
+        return reverse('expense_list')  # your named URL for items page
