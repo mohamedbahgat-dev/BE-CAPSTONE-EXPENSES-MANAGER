@@ -1,0 +1,9 @@
+#!/bin/sh
+'''exec' "/Users/mohamedbahgat/Documents/Documents - Mohamed’s Laptop/ALX/alx-back-end/Capstone-project/Expense-Tracker/BE-CAPSTONE-EXPENSES-MANAGER/.venv/bin/python3.12" "$0" "$@"
+' '''
+import sys
+from gunicorn.app.wsgiapp import run
+if __name__ == '__main__':
+    if sys.argv[0].endswith('.exe'):
+        sys.argv[0] = sys.argv[0][:-4]
+    sys.exit(run())
