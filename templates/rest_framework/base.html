@@ -14,8 +14,8 @@
 >
 <a style="color: white; margin-top: 15px" href="{% url 'home' %}">Home</a>
 
-{% endblock %} {% block userlinks %} {% if user.is_authenticated %} {%
-optional_logout request user csrf_token %} {% else %} {% optional_login
-request%}
+{% endblock %} {% block userlinks %} {% if user.is_authenticated %}
+<p>{{ user.username }}</p>
+{% else %}
 <a href="{% url 'api/v1/auth/registration/' %}">Register</a>
 {% endif %} {% endblock %}
