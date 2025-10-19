@@ -13,7 +13,7 @@ class ExpensesCreateView(CreateView):
     model = Expense
     form_class = ExpensesForm
     template_name = 'transaction/add_transaction.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
     context_object_name = 'transactions'
 
     def get_form_kwargs(self):
@@ -29,7 +29,7 @@ class ExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Expense
     form_class = ExpensesForm
     template_name = 'transaction/update_transaction.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
     context_object_name = 'transactions'
 
     def get_form_kwargs(self):
@@ -50,7 +50,7 @@ class ExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class ExpensesDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Expense
     template_name = 'transaction/delete_transaction.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
 
     def test_func(self):
         """Ensure only the owner of the expense can edit it"""
