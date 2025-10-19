@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -188,20 +189,3 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Application for tracking and managing personal and househould expenses",
     "VERSION": "1.0.0",
 }
-
-# secure cookies 
-SESSION_COOKIE_SECURE = True       # Send cookies only over HTTPS
-CSRF_COOKIE_SECURE = True          # CSRF cookie only over HTTPS
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-CSRF_USE_SESSIONS = True
-
-# Clickjacking & MIME Protection
-X_FRAME_OPTIONS = 'DENY'
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-
-# HTTPS & HSTS
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-
