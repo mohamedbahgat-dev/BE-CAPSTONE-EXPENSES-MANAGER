@@ -3,7 +3,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .forms import ExpensesForm
 from .models import Category, Expense
 
@@ -13,7 +13,6 @@ class ExpensesCreateView(CreateView):
     model = Expense
     form_class = ExpensesForm
     template_name = 'transaction/add_transaction.html'
-    success_url = reverse_lazy('dashboard')
     context_object_name = 'transactions'
 
     def get_form_kwargs(self):
@@ -24,12 +23,14 @@ class ExpensesCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('dashboard', kwargs={'pk': self.request.user.pk})
 
 class ExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Expense
     form_class = ExpensesForm
     template_name = 'transaction/update_transaction.html'
-    success_url = reverse_lazy('dashboard')
     context_object_name = 'transactions'
 
     def get_form_kwargs(self):
@@ -45,17 +46,23 @@ class ExpensesUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         """Ensure only the owner of the expense can edit it"""
         expense = self.get_object()
         return self.request.user == expense.user
+    
+    def get_success_url(self):
+        return reverse('dashboard', kwargs={'pk': self.request.user.pk})
 
 
 class ExpensesDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Expense
     template_name = 'transaction/delete_transaction.html'
-    success_url = reverse_lazy('dashboard')
+   
 
     def test_func(self):
         """Ensure only the owner of the expense can edit it"""
         expense = self.get_object()
         return self.request.user == expense.user
+    
+    def get_success_url(self):
+        return reverse('dashboard', kwargs={'pk': self.request.user.pk})
 
 
 class HomePageView(ListView):
